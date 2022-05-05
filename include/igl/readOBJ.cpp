@@ -288,6 +288,26 @@ IGL_INLINE bool igl::readOBJ(
 }
 
 template <
+	typename DerivedV,
+	typename DerivedTC,
+	typename DerivedCN,
+	typename DerivedF,
+	typename DerivedFTC,
+	typename DerivedFN>
+	IGL_INLINE bool igl::readOBJ(
+		const std::string str,
+		Eigen::PlainObjectBase<DerivedV>& V,
+		Eigen::PlainObjectBase<DerivedTC>& TC,
+		Eigen::PlainObjectBase<DerivedCN>& CN,
+		Eigen::PlainObjectBase<DerivedF>& F,
+		Eigen::PlainObjectBase<DerivedFTC>& FTC,
+		Eigen::PlainObjectBase<DerivedFN>& FN)
+{
+    std::vector<std::tuple<std::string, int, int>> FM;
+    return readOBJ(str, V, TC, CN, F, FTC, FN, FM);
+}
+
+template <
   typename DerivedV, 
   typename DerivedTC, 
   typename DerivedCN, 
@@ -301,11 +321,13 @@ IGL_INLINE bool igl::readOBJ(
   Eigen::PlainObjectBase<DerivedCN>& CN,
   Eigen::PlainObjectBase<DerivedF>& F,
   Eigen::PlainObjectBase<DerivedFTC>& FTC,
-  Eigen::PlainObjectBase<DerivedFN>& FN)
+  Eigen::PlainObjectBase<DerivedFN>& FN,
+  std::vector<std::tuple<std::string, int, int>>& FM)
 {
   std::vector<std::vector<double> > vV,vTC,vN;
   std::vector<std::vector<int> > vF,vFTC,vFN;
-  bool success = igl::readOBJ(str,vV,vTC,vN,vF,vFTC,vFN);
+  
+  bool success = igl::readOBJ(str,vV,vTC,vN,vF,vFTC,vFN, FM);
   if(!success)
   {
     // readOBJ(str,vV,vTC,vN,vF,vFTC,vFN) should have already printed an error

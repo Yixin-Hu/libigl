@@ -117,6 +117,24 @@ namespace igl
     Eigen::PlainObjectBase<DerivedF>& F,
     Eigen::PlainObjectBase<DerivedFTC>& FTC,
     Eigen::PlainObjectBase<DerivedFN>& FN);
+
+  template <
+	  typename DerivedV,
+	  typename DerivedTC,
+	  typename DerivedCN,
+	  typename DerivedF,
+	  typename DerivedFTC,
+	  typename DerivedFN>
+	  IGL_INLINE bool readOBJ(
+		  const std::string str,
+		  Eigen::PlainObjectBase<DerivedV>& V,
+		  Eigen::PlainObjectBase<DerivedTC>& TC,
+		  Eigen::PlainObjectBase<DerivedCN>& CN,
+		  Eigen::PlainObjectBase<DerivedF>& F,
+		  Eigen::PlainObjectBase<DerivedFTC>& FTC,
+		  Eigen::PlainObjectBase<DerivedFN>& FN,
+		  std::vector<std::tuple<std::string, int, int>>& FM);
+
   template <typename DerivedV, typename DerivedF>
   IGL_INLINE bool readOBJ(
     const std::string str,
